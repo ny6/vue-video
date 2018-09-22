@@ -1,0 +1,40 @@
+<template>
+  <ul class="list-group">
+    <VideoListItem
+      v-for="video in videos"
+      :video="video"
+      :key="video.etag"
+      @videoSelect="onVideoSelect"
+    />
+  </ul>
+</template>
+
+<script>
+import VideoListItem from './VideoListItem.vue';
+
+export default {
+  name: 'VideoList',
+  components: { VideoListItem },
+  props: {
+    videos: {
+      type: Array,
+      required: true,
+    },
+  },
+  methods: {
+    onVideoSelect(video) {
+      this.$emit('videoSelect', video);
+    },
+  },
+};
+</script>
+
+<style scoped>
+  li {
+    display: flex;
+    cursor: pointer;
+  }
+  li:hover {
+    background-color: #eee;
+  }
+</style>
